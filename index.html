@@ -479,6 +479,101 @@
   }
   .footer p { font-weight: 500; }
 
+  /* ── Confirmed date badge ── */
+  .confirmed-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: linear-gradient(135deg, #1B5E20, #43A047);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin-left: 10px;
+    box-shadow: 0 2px 8px rgba(27,94,32,0.4);
+    vertical-align: middle;
+    animation: badgePop 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+  @keyframes badgePop {
+    from { transform: scale(0); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+
+  /* ── Activity card (swimming etc.) ── */
+  .place-card.activity {
+    background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 100%);
+    border-left-color: #00897B;
+  }
+  .place-card.activity .place-tag { background: linear-gradient(135deg, #004D40, #00897B); }
+  .place-card.activity::after { background: #00897B; }
+
+  /* ── Countdown & stats strip ── */
+  .trip-stats {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+    justify-content: center;
+  }
+  .stat-pill {
+    background: linear-gradient(135deg, #E8EAF6, #C5CAE9);
+    border-radius: 50px;
+    padding: 8px 18px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #283593;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 8px rgba(40,53,147,0.12);
+  }
+  .countdown-box {
+    background: linear-gradient(135deg, #1A237E, #283593, #3949AB);
+    border-radius: 18px;
+    padding: 18px 22px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    box-shadow: 0 6px 20px rgba(26,35,126,0.3);
+  }
+  .countdown-box .cd-label {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .countdown-box .cd-units {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .cd-unit {
+    text-align: center;
+    background: rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 8px 14px;
+    min-width: 58px;
+  }
+  .cd-unit .cd-num {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #FFD740;
+    line-height: 1;
+    display: block;
+  }
+  .cd-unit .cd-sub {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
   /* ── Responsive ── */
   @media (max-width: 640px) {
     .header h1 { font-size: 2.4rem; }
@@ -538,7 +633,29 @@
 
     <div class="info-row">
       <span class="icon">📅</span>
-      <span><strong>1 April - 6 April 2026</strong> (5 nights / 6 days)</span>
+      <span><strong>2 April - 6 April 2026</strong> (4 nights / 5 days)</span>
+    </div>
+
+    <!-- Countdown -->
+    <div class="countdown-box" id="countdown-cornwall">
+      <div>
+        <div class="cd-label">⏳ Cornwall Trip Starts In</div>
+      </div>
+      <div class="cd-units" id="cd-units-cornwall">
+        <div class="cd-unit"><span class="cd-num" id="cd-cornwall-d">--</span><span class="cd-sub">Days</span></div>
+        <div class="cd-unit"><span class="cd-num" id="cd-cornwall-h">--</span><span class="cd-sub">Hours</span></div>
+        <div class="cd-unit"><span class="cd-num" id="cd-cornwall-m">--</span><span class="cd-sub">Mins</span></div>
+        <div class="cd-unit"><span class="cd-num" id="cd-cornwall-s">--</span><span class="cd-sub">Secs</span></div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="trip-stats">
+      <div class="stat-pill">📍 6 Towns / Areas</div>
+      <div class="stat-pill">🏨 1 Resort</div>
+      <div class="stat-pill">🅿️ 5 Car Parks</div>
+      <div class="stat-pill">🍽️ 4 Food Spots</div>
+      <div class="stat-pill">🏛️ 6 Attractions</div>
     </div>
 
     <!-- Recommended Service Stop -->
@@ -605,7 +722,7 @@
 
     <!-- St Austell -->
     <div class="area-section">
-      <div class="area-title" data-area="staustell"><span class="area-icon">🌿</span> St Austell</div>
+      <div class="area-title" data-area="staustell"><span class="area-icon">🌿</span> St Austell <span class="confirmed-badge">✅ 5 Apr 2026</span></div>
 
       <div class="place-card attraction">
         <span class="place-tag">Attraction</span>
@@ -624,7 +741,7 @@
 
     <!-- Tintagel -->
     <div class="area-section">
-      <div class="area-title" data-area="tintagel"><span class="area-icon">🏰</span> Tintagel</div>
+      <div class="area-title" data-area="tintagel"><span class="area-icon">🏰</span> Tintagel <span class="confirmed-badge">✅ 6 Apr 2026</span></div>
 
       <div class="place-card parking">
         <span class="place-tag">Parking</span>
@@ -743,6 +860,28 @@
       <span><strong>6 April - 10 April 2026</strong> (4 nights / 5 days)</span>
     </div>
 
+    <!-- Countdown -->
+    <div class="countdown-box" id="countdown-somerset">
+      <div>
+        <div class="cd-label">⏳ Somerset Trip Starts In</div>
+      </div>
+      <div class="cd-units" id="cd-units-somerset">
+        <div class="cd-unit"><span class="cd-num" id="cd-somerset-d">--</span><span class="cd-sub">Days</span></div>
+        <div class="cd-unit"><span class="cd-num" id="cd-somerset-h">--</span><span class="cd-sub">Hours</span></div>
+        <div class="cd-unit"><span class="cd-num" id="cd-somerset-m">--</span><span class="cd-sub">Mins</span></div>
+        <div class="cd-unit"><span class="cd-num" id="cd-somerset-s">--</span><span class="cd-sub">Secs</span></div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="trip-stats">
+      <div class="stat-pill">📍 4 Towns / Areas</div>
+      <div class="stat-pill">🏨 1 Resort</div>
+      <div class="stat-pill">🅿️ 4 Car Parks</div>
+      <div class="stat-pill">🏊 1 Activity</div>
+      <div class="stat-pill">🏛️ 5 Attractions</div>
+    </div>
+
     <!-- Accommodation -->
     <div class="area-section">
       <div class="area-title" data-area="accommodation"><span class="area-icon">🏨</span> Accommodation</div>
@@ -751,6 +890,13 @@
         <h4>Unity Beach Somerset</h4>
         <p class="place-address">Coast Rd, Brean, Sands, Burnham-on-Sea TA8 2RB</p>
         <a class="map-link" href="https://maps.app.goo.gl/e8QUfJEtoEmWq5G57" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card activity">
+        <span class="place-tag">🏊 Activity</span>
+        <h4>Swimming at the Beach</h4>
+        <p class="place-address">Unity Beach Somerset, Brean Sands</p>
+        <p class="place-remark">🗓️ 8 April 2026 &nbsp;|&nbsp; ⏰ 10:00 am</p>
       </div>
     </div>
 
@@ -859,16 +1005,43 @@
 
 <script>
   function filterTrips(filter) {
-    // Update active button
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.filter === filter);
     });
-
-    // Show/hide trip sections
     document.querySelectorAll('.trip-section').forEach(section => {
       section.classList.toggle('hidden', section.dataset.trip !== filter);
     });
   }
+
+  // Countdown timer
+  function updateCountdown(targetDate, prefix) {
+    const now = new Date();
+    const diff = targetDate - now;
+    if (diff <= 0) {
+      ['d','h','m','s'].forEach(u => {
+        document.getElementById('cd-' + prefix + '-' + u).textContent = '00';
+      });
+      return;
+    }
+    const d = Math.floor(diff / (1000*60*60*24));
+    const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+    const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+    const s = Math.floor((diff % (1000*60)) / 1000);
+    document.getElementById('cd-' + prefix + '-d').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-' + prefix + '-h').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-' + prefix + '-m').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-' + prefix + '-s').textContent = String(s).padStart(2,'0');
+  }
+
+  const cornwallDate  = new Date('2026-04-02T00:00:00');
+  const somersetDate  = new Date('2026-04-06T00:00:00');
+
+  function tick() {
+    updateCountdown(cornwallDate, 'cornwall');
+    updateCountdown(somersetDate, 'somerset');
+  }
+  tick();
+  setInterval(tick, 1000);
 
   // Show Cornwall by default on load
   filterTrips('cornwall');
