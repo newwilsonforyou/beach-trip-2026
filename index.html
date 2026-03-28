@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beach Trip 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Pacifico&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(160deg, #0D47A1 0%, #1565C0 8%, #0288D1 20%, #0097A7 35%, #00897B 50%, #43A047 62%, #F9A825 78%, #FF7043 92%, #E53935 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Sky + cloud bar at top ── */
+  .sky-bar {
+    background: linear-gradient(180deg, #1A237E 0%, #283593 30%, #1565C0 60%, #42A5F5 100%);
+    height: 160px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cloud {
+    position: absolute;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50px;
+    animation: drift linear infinite;
+  }
+  .cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+  }
+  .cloud-1 { width:110px; height:32px; top:30px; left:-120px; animation-duration:22s; animation-delay:0s; }
+  .cloud-1::before { width:50px; height:50px; top:-25px; left:15px; }
+  .cloud-1::after  { width:35px; height:35px; top:-15px; left:55px; }
+  .cloud-2 { width:80px;  height:24px; top:70px; left:-90px;  animation-duration:30s; animation-delay:8s;  opacity:0.7; }
+  .cloud-2::before { width:36px; height:36px; top:-18px; left:10px; }
+  .cloud-2::after  { width:26px; height:26px; top:-11px; left:38px; }
+  .cloud-3 { width:130px; height:36px; top:20px; left:-140px; animation-duration:18s; animation-delay:4s;  opacity:0.6; }
+  .cloud-3::before { width:60px; height:60px; top:-30px; left:20px; }
+  .cloud-3::after  { width:44px; height:44px; top:-20px; left:68px; }
+  @keyframes drift {
+    from { transform: translateX(0); }
+    to   { transform: translateX(calc(100vw + 180px)); }
+  }
+
+  /* ── Animated Sun ── */
+  .sun-wrap {
+    position: absolute;
+    top: 18px;
+    right: 80px;
+  }
+  .sun {
+    width: 72px;
+    height: 72px;
+    background: radial-gradient(circle at 40% 40%, #FFF176, #FFD740, #FF8F00);
+    border-radius: 50%;
+    box-shadow: 0 0 0 8px rgba(255,215,64,0.25), 0 0 0 16px rgba(255,183,77,0.15), 0 0 60px rgba(255,200,0,0.5);
+    animation: sunPulse 4s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
+  }
+  .sun-rays {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 130px;
+    height: 130px;
+    animation: spinRay 12s linear infinite;
+  }
+  .sun-rays::before, .sun-rays::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 4px;
+    border-radius: 4px;
+    background: rgba(255,220,50,0.5);
+    transform-origin: center bottom;
+  }
+  .sun-rays::before {
+    height: 30px;
+    margin-left: -2px;
+    margin-top: -65px;
+    box-shadow:
+      0 130px 0 rgba(255,220,50,0.5),
+      46px 46px 0 rgba(255,220,50,0.5),
+      -46px 46px 0 rgba(255,220,50,0.5),
+      46px -46px 0 rgba(255,220,50,0.5),
+      -46px -46px 0 rgba(255,220,50,0.5);
+  }
+  @keyframes sunPulse {
+    0%,100% { box-shadow: 0 0 0 8px rgba(255,215,64,0.25), 0 0 0 16px rgba(255,183,77,0.15), 0 0 60px rgba(255,200,0,0.5); }
+    50%      { box-shadow: 0 0 0 12px rgba(255,215,64,0.3), 0 0 0 24px rgba(255,183,77,0.2), 0 0 90px rgba(255,200,0,0.7); }
+  }
+  @keyframes spinRay { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+  /* ── Wave divider ── */
+  .waves {
+    position: relative;
+    width: 100%;
+    height: 90px;
+    overflow: hidden;
+    margin-top: -2px;
+  }
+  .wave {
+    position: absolute;
+    bottom: 0;
+    width: 200%;
+    height: 70px;
+    border-radius: 50% 50% 0 0;
+    animation: waveMove 6s ease-in-out infinite;
+  }
+  .wave:nth-child(1) { background: rgba(255,255,255,0.15); }
+  .wave:nth-child(2) { height: 55px; background: rgba(255,255,255,0.25); animation-duration: 4s; animation-direction: reverse; }
+  .wave:nth-child(3) { height: 38px; background: rgba(255,255,255,0.4);  animation-duration: 5s; animation-delay: 1s; }
+  @keyframes waveMove {
+    0%,100% { transform: translateX(0); }
+    50%      { transform: translateX(-25%); }
+  }
+
+  /* ── Header ── */
+  .header {
+    text-align: center;
+    padding: 10px 20px 18px;
+  }
+  .header h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 3.4rem;
+    background: linear-gradient(135deg, #fff 0%, #FFF9C4 40%, #FFD740 70%, #FFB300 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 3px 8px rgba(0,0,0,0.35));
+    margin-bottom: 10px;
+    animation: floatTitle 5s ease-in-out infinite;
+  }
+  @keyframes floatTitle {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-5px); }
+  }
+  .header p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.92);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.7;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  }
+
+  .deco {
+    font-size: 2rem;
+    margin: 8px 0 4px;
+    letter-spacing: 14px;
+    text-align: center;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    animation: floatDeco 3s ease-in-out infinite;
+  }
+  @keyframes floatDeco {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+  }
+
+  /* ── Filter buttons ── */
+  .filter-bar {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    padding: 20px 20px 14px;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    padding: 13px 32px;
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 50px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    letter-spacing: 0.3px;
+  }
+  .filter-btn:hover {
+    transform: translateY(-3px) scale(1.04);
+    background: rgba(255,255,255,0.28);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  }
+  .filter-btn[data-filter="cornwall"].active {
+    background: linear-gradient(135deg, #00E5FF, #00BCD4, #0097A7);
+    border-color: transparent;
+    box-shadow: 0 6px 24px rgba(0,188,212,0.6), 0 0 0 3px rgba(0,229,255,0.3);
+    transform: translateY(-3px) scale(1.06);
+  }
+  .filter-btn[data-filter="somerset"].active {
+    background: linear-gradient(135deg, #FFCA28, #FF7043, #E53935);
+    border-color: transparent;
+    box-shadow: 0 6px 24px rgba(255,112,67,0.6), 0 0 0 3px rgba(255,202,40,0.3);
+    transform: translateY(-3px) scale(1.06);
+  }
+
+  /* ── Trip sections ── */
+  .trip-section {
+    max-width: 920px;
+    margin: 24px auto 0;
+    padding: 0 16px 30px;
+  }
+  .trip-section.hidden { display: none; }
+
+  /* ── Trip banner ── */
+  .trip-banner {
+    border-radius: 24px 24px 0 0;
+    padding: 36px 30px 30px;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .trip-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .trip-banner.cornwall {
+    background: linear-gradient(135deg, #006064 0%, #00838F 30%, #00BCD4 60%, #26C6DA 80%, #80DEEA 100%);
+    box-shadow: 0 8px 32px rgba(0,131,143,0.5);
+  }
+  .trip-banner.somerset {
+    background: linear-gradient(135deg, #BF360C 0%, #E64A19 25%, #FF5722 50%, #FF7043 70%, #FFAB91 100%);
+    box-shadow: 0 8px 32px rgba(230,74,25,0.5);
+  }
+  .trip-banner h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    letter-spacing: -0.5px;
+    position: relative;
+  }
+  .trip-banner .location {
+    font-size: 1rem;
+    margin-top: 8px;
+    opacity: 0.92;
+    font-weight: 500;
+    position: relative;
+  }
+
+  /* ── Trip body ── */
+  .trip-body {
+    background: linear-gradient(180deg, #F8FBFF 0%, #FFFFFF 40%);
+    border-radius: 0 0 24px 24px;
+    padding: 28px;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.14);
+    margin-bottom: 10px;
+  }
+
+  /* ── Map container ── */
+  .map-container {
+    border-radius: 18px;
+    overflow: hidden;
+    margin-bottom: 22px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+    border: 3px solid rgba(255,255,255,0.8);
+  }
+  .map-container iframe {
+    width: 100%;
+    height: 420px;
+    border: 0;
+    display: block;
+  }
+
+  /* ── Info rows ── */
+  .info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-size: 0.96rem;
+    color: #37474F;
+    line-height: 1.6;
+    background: linear-gradient(135deg, #E3F2FD, #F3E5F5);
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-weight: 500;
+  }
+  .info-row .icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  /* ── Area section headers ── */
+  .area-section { margin-top: 28px; }
+
+  .area-title {
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #fff;
+    padding: 10px 18px;
+    margin-bottom: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    border-radius: 50px;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+  }
+  .area-title .area-icon { font-size: 1.2rem; }
+
+  /* Area title colours by keyword — uses data attribute */
+  .area-title[data-area="service"]       { background: linear-gradient(135deg, #546E7A, #78909C); }
+  .area-title[data-area="accommodation"] { background: linear-gradient(135deg, #C62828, #EF5350); }
+  .area-title[data-area="looe"]          { background: linear-gradient(135deg, #0277BD, #29B6F6); }
+  .area-title[data-area="staustell"]     { background: linear-gradient(135deg, #2E7D32, #66BB6A); }
+  .area-title[data-area="tintagel"]      { background: linear-gradient(135deg, #4527A0, #9575CD); }
+  .area-title[data-area="polperro"]      { background: linear-gradient(135deg, #00695C, #26A69A); }
+  .area-title[data-area="plymouth"]      { background: linear-gradient(135deg, #1565C0, #42A5F5); }
+  .area-title[data-area="weston"]        { background: linear-gradient(135deg, #E65100, #FFA726); }
+  .area-title[data-area="wells"]         { background: linear-gradient(135deg, #6A1B9A, #CE93D8); }
+  .area-title[data-area="cheddar"]       { background: linear-gradient(135deg, #558B2F, #AED581); }
+  /* fallback */
+  .area-title:not([data-area])           { background: linear-gradient(135deg, #37474F, #78909C); }
+
+  /* ── Place cards ── */
+  .place-card {
+    border-radius: 16px;
+    padding: 16px 18px;
+    margin-bottom: 11px;
+    border-left: 5px solid #B0BEC5;
+    transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    position: relative;
+    overflow: hidden;
+  }
+  .place-card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 60px; height: 60px;
+    border-radius: 0 16px 0 60px;
+    opacity: 0.07;
+  }
+  .place-card:hover {
+    transform: translateX(6px) translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+
+  /* Card type colours */
+  .place-card.parking     { background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%); border-left-color: #1E88E5; }
+  .place-card.food        { background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); border-left-color: #43A047; }
+  .place-card.attraction  { background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%); border-left-color: #FB8C00; }
+  .place-card.museum      { background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%); border-left-color: #8E24AA; }
+  .place-card.accommodation{ background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%); border-left-color: #E53935; }
+  .place-card.service     { background: linear-gradient(135deg, #ECEFF1 0%, #CFD8DC 100%); border-left-color: #546E7A; }
+  .place-card.shopping    { background: linear-gradient(135deg, #E0F7FA 0%, #B2EBF2 100%); border-left-color: #00ACC1; }
+  .place-card.supermarket { background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%); border-left-color: #F4511E; }
+
+  .place-card::after {
+    background: currentColor;
+  }
+  .place-card.parking::after     { background: #1E88E5; }
+  .place-card.food::after        { background: #43A047; }
+  .place-card.attraction::after  { background: #FB8C00; }
+  .place-card.museum::after      { background: #8E24AA; }
+  .place-card.accommodation::after{ background: #E53935; }
+  .place-card.service::after     { background: #546E7A; }
+  .place-card.shopping::after    { background: #00ACC1; }
+  .place-card.supermarket::after { background: #F4511E; }
+
+  /* Tags */
+  .place-card .place-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    padding: 3px 11px;
+    border-radius: 20px;
+    margin-bottom: 7px;
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  .place-card.parking .place-tag     { background: linear-gradient(135deg,#1E88E5,#42A5F5); }
+  .place-card.food .place-tag        { background: linear-gradient(135deg,#2E7D32,#66BB6A); }
+  .place-card.attraction .place-tag  { background: linear-gradient(135deg,#E65100,#FFA726); }
+  .place-card.museum .place-tag      { background: linear-gradient(135deg,#6A1B9A,#AB47BC); }
+  .place-card.accommodation .place-tag{ background: linear-gradient(135deg,#B71C1C,#EF5350); }
+  .place-card.service .place-tag     { background: linear-gradient(135deg,#37474F,#78909C); }
+  .place-card.shopping .place-tag    { background: linear-gradient(135deg,#006064,#26C6DA); }
+  .place-card.supermarket .place-tag { background: linear-gradient(135deg,#BF360C,#FF7043); }
+
+  .place-card h4 {
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: #1A237E;
+    margin-bottom: 4px;
+  }
+  .place-card .place-address {
+    font-size: 0.84rem;
+    color: #546E7A;
+    margin-bottom: 9px;
+    font-weight: 500;
+  }
+  .place-card .place-remark {
+    font-size: 0.82rem;
+    color: #5D4037;
+    font-weight: 600;
+    margin-bottom: 9px;
+    background: rgba(255,255,255,0.6);
+    padding: 5px 10px;
+    border-radius: 8px;
+    display: inline-block;
+  }
+  .place-card .map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 14px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #1565C0, #1E88E5);
+    box-shadow: 0 3px 8px rgba(21,101,192,0.35);
+    transition: all 0.2s;
+  }
+  .place-card .map-link:hover {
+    background: linear-gradient(135deg, #0D47A1, #1565C0);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(21,101,192,0.45);
+  }
+
+  /* ── Open map banner button ── */
+  .open-map-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 16px;
+    padding: 10px 24px;
+    background: rgba(255,255,255,0.2);
+    border: 2px solid rgba(255,255,255,0.7);
+    border-radius: 50px;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.4px;
+    backdrop-filter: blur(6px);
+    transition: all 0.25s;
+    position: relative;
+  }
+  .open-map-btn:hover {
+    background: rgba(255,255,255,0.38);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 32px 20px 48px;
+    color: rgba(255,255,255,0.9);
+    font-size: 0.95rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  }
+  .footer .big-emoji {
+    font-size: 3.5rem;
+    margin-bottom: 12px;
+    display: block;
+    animation: floatDeco 3s ease-in-out infinite;
+  }
+  .footer p { font-weight: 500; }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .header h1 { font-size: 2.4rem; }
+    .trip-banner h2 { font-size: 1.6rem; }
+    .filter-btn { padding: 10px 20px; font-size: 0.9rem; }
+    .map-container iframe { height: 260px; }
+    .sun-wrap { right: 20px; }
+    .trip-body { padding: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Sky with clouds & sun -->
+<div class="sky-bar">
+  <div class="cloud cloud-1"></div>
+  <div class="cloud cloud-2"></div>
+  <div class="cloud cloud-3"></div>
+  <div class="sun-wrap">
+    <div class="sun-rays"></div>
+    <div class="sun"></div>
+  </div>
+</div>
+
+<div class="waves">
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
+
+<div class="header">
+  <h1>Beach Trip 2026</h1>
+  <p>Two amazing trips — use the buttons below to explore each one! 🌊</p>
+</div>
+
+<div class="deco">🌴 🏖️ 🍹 🐠 🌊</div>
+
+<!-- Filter Buttons -->
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="cornwall" onclick="filterTrips('cornwall')">Cornwall Trip</button>
+  <button class="filter-btn" data-filter="somerset" onclick="filterTrips('somerset')">Somerset Trip</button>
+</div>
+
+<!-- ==================== CORNWALL TRIP ==================== -->
+<div class="trip-section" data-trip="cornwall">
+  <div class="trip-banner cornwall">
+    <h2>Cornwall Trip</h2>
+    <span class="location">📍 Cornwall, England</span><br>
+    <a class="open-map-btn" href="https://maps.app.goo.gl/bjm19X1tkQgEvWm4A" target="_blank" rel="noopener">🗺️ Open Full Map in Google Maps</a>
+  </div>
+  <div class="trip-body">
+
+    <!-- Trip Map -->
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1YydXDVlulxCUqZ2TNyr6PbklSOkytr8&ehbc=2E312F" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <div class="info-row">
+      <span class="icon">📅</span>
+      <span><strong>1 April - 6 April 2026</strong> (5 nights / 6 days)</span>
+    </div>
+
+    <!-- Recommended Service Stop -->
+    <div class="area-section">
+      <div class="area-title" data-area="service"><span class="area-icon">⛽</span> Recommended Service Stop</div>
+      <div class="place-card service">
+        <span class="place-tag">Service Station</span>
+        <h4>Gloucester Services Southbound</h4>
+        <p class="place-address">M5 (between junc. 12 &amp; 11a), Brookthorpe, Gloucester GL4 0DN</p>
+        <a class="map-link" href="https://maps.app.goo.gl/bZ81kL1Xshsgypjd8" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+    </div>
+
+    <!-- Accommodation -->
+    <div class="area-section">
+      <div class="area-title" data-area="accommodation"><span class="area-icon">🏨</span> Accommodation</div>
+      <div class="place-card accommodation">
+        <span class="place-tag">Living Place</span>
+        <h4>Millendreath Beach Resort</h4>
+        <p class="place-address">Beach Resort, Millendreath, Looe PL13 1PE</p>
+        <a class="map-link" href="https://maps.app.goo.gl/ss2UKpnZiRZk1r9V6" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+    </div>
+
+    <!-- Looe -->
+    <div class="area-section">
+      <div class="area-title" data-area="looe"><span class="area-icon">🌊</span> Looe</div>
+
+      <div class="place-card parking">
+        <span class="place-tag">Car Park</span>
+        <h4>Millpool Car Park</h4>
+        <p class="place-address">Unnamed Road, Looe PL13 2AH</p>
+        <a class="map-link" href="https://maps.app.goo.gl/nWb6K2jHjKgkhxhc9" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card food">
+        <span class="place-tag">Farm Shop</span>
+        <h4>Quayside Fresh Ltd</h4>
+        <p class="place-address">Buller Quay, The Quay, Looe PL13 1DX</p>
+        <a class="map-link" href="https://maps.app.goo.gl/x2o49o8qWdP5Dd4J8" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card food">
+        <span class="place-tag">Seafood</span>
+        <h4>Pengelly's Fishmongers of Looe</h4>
+        <p class="place-address">The Quay, Looe PL13 1DX</p>
+        <a class="map-link" href="https://maps.app.goo.gl/t3njGBV4yNcvNTni7" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card museum">
+        <span class="place-tag">Museum</span>
+        <h4>Old Guildhall Museum &amp; Gaol</h4>
+        <p class="place-address">East 1AA, Higher Market St, Looe</p>
+        <a class="map-link" href="https://maps.app.goo.gl/jaVcE6yBw9LMVWuJA" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card attraction">
+        <span class="place-tag">Sightseeing</span>
+        <h4>Looe Beach</h4>
+        <p class="place-address">5 Lower Chapel St, East Looe, Looe PL13 1AT</p>
+        <a class="map-link" href="https://maps.app.goo.gl/uNPHRK8jz2ou7wNM6" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+    </div>
+
+    <!-- St Austell -->
+    <div class="area-section">
+      <div class="area-title" data-area="staustell"><span class="area-icon">🌿</span> St Austell</div>
+
+      <div class="place-card attraction">
+        <span class="place-tag">Attraction</span>
+        <h4>Eden Project</h4>
+        <p class="place-address">Bodelva, Par PL24 2SG</p>
+        <a class="map-link" href="https://maps.app.goo.gl/Yes9aMh2xZHt4N2w5" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card attraction">
+        <span class="place-tag">Art</span>
+        <h4>Cscape Art</h4>
+        <p class="place-address">The Old Workshop, Charlestown Rd, Saint Austell PL25 3NJ</p>
+        <a class="map-link" href="https://maps.app.goo.gl/37Rd9ifmzcScxPHu7" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+    </div>
+
+    <!-- Tintagel -->
+    <div class="area-section">
+      <div class="area-title" data-area="tintagel"><span class="area-icon">🏰</span> Tintagel</div>
+
+      <div class="place-card parking">
+        <span class="place-tag">Parking</span>
+        <h4>King Arthur's Car Park</h4>
+        <p class="place-address">Fore Street, opposite NT Old Post Office, Tintagel PL34 0DA</p>
+        <a class="map-link" href="https://maps.app.goo.gl/23q2FXrkqBEsToED7" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card parking">
+        <span class="place-tag">Parking</span>
+        <h4>Tintagel Car Park (Mayfield Arcade)</h4>
+        <p class="place-address">Tintagel PL34 0DA</p>
+        <a class="map-link" href="https://maps.app.goo.gl/QjN57b9KmTj7SCQcA" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card attraction">
+        <span class="place-tag">Attraction</span>
+        <h4>Tintagel Castle</h4>
+        <p class="place-address">Castle Rd, Tintagel PL34 0HE</p>
+        <a class="map-link" href="https://maps.app.goo.gl/Th4ZnePLdyc2tTuv5" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card food">
+        <span class="place-tag">Farm Shop &amp; Cafe</span>
+        <h4>Boscastle Farm Shop &amp; Cafe</h4>
+        <p class="place-address">Hillsborough Farm, Boscastle PL35 0HH</p>
+        <a class="map-link" href="https://maps.app.goo.gl/dqwW2GDHLFZH4hos8" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+    </div>
+
+    <!-- Polperro -->
+    <div class="area-section">
+      <div class="area-title" data-area="polperro"><span class="area-icon">🎣</span> Polperro</div>
+
+      <div class="place-card parking">
+        <span class="place-tag">Car Park</span>
+        <h4>Polperro Public Car Park</h4>
+        <p class="place-address">The Car Park, Longcoombe Ln, Polperro, Looe PL13 2PL</p>
+        <a class="map-link" href="https://maps.app.goo.gl/NEfdjGo1tmHQyrLL6" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card attraction">
+        <span class="place-tag">Sightseeing</span>
+        <h4>Polperro Harbour</h4>
+        <p class="place-address">8 Lansallos St, Polperro, Looe PL13 2QU</p>
+        <a class="map-link" href="https://maps.app.goo.gl/Axhcdy3cqGra8JqX9" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+    </div>
+
+    <!-- Plymouth -->
+    <div class="area-section">
+      <div class="area-title" data-area="plymouth"><span class="area-icon">⚓</span> Plymouth</div>
+
+      <div class="place-card parking">
+        <span class="place-tag">Car Park</span>
+        <h4>Plymouth Parking</h4>
+        <p class="place-address">50°22'03.7"N 4°07'43.5"W, Plymouth</p>
+        <a class="map-link" href="https://maps.app.goo.gl/x4ST7Die3a3tuyTA8" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card shopping">
+        <span class="place-tag">Retail</span>
+        <h4>Barbican Retail Park</h4>
+        <p class="place-address">Plymouth PL4 0LG</p>
+        <a class="map-link" href="https://maps.app.goo.gl/t1uq2JgFDeGUFahWA" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card attraction">
+        <span class="place-tag">Distillery</span>
+        <h4>Plymouth Gin Distillery</h4>
+        <p class="place-address">60 Southside St, Plymouth PL1 2LQ</p>
+        <a class="map-link" href="https://maps.app.goo.gl/oNbNskFuMW6ZDcos7" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card food">
+        <span class="place-tag">Bakery</span>
+        <h4>Jacka Bakery &amp; Delicatessen</h4>
+        <p class="place-address">38 Southside St, Plymouth PL1 2LE</p>
+        <a class="map-link" href="https://maps.app.goo.gl/5wKjsZ2nJZByXUgk8" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card shopping">
+        <span class="place-tag">Market</span>
+        <h4>Plymouth Market</h4>
+        <p class="place-address">Cornwall St, Plymouth PL1 1PS</p>
+        <a class="map-link" href="https://maps.app.goo.gl/1wtNfWDQb4rhZ4CV8" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card attraction">
+        <span class="place-tag">Sightseeing</span>
+        <h4>Cross on the Hoe</h4>
+        <p class="place-address">Unnamed Road, Plymouth PL1 2HJ</p>
+        <a class="map-link" href="https://maps.app.goo.gl/wCQahABYkQnzByvHA" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== SOMERSET TRIP ==================== -->
+<div class="trip-section" data-trip="somerset">
+  <div class="trip-banner somerset">
+    <h2>Somerset Trip</h2>
+    <span class="location">📍 Somerset, England</span><br>
+    <a class="open-map-btn" href="https://maps.app.goo.gl/FTNfm2njGJJBmKug6" target="_blank" rel="noopener">🗺️ Open Full Map in Google Maps</a>
+  </div>
+  <div class="trip-body">
+
+    <!-- Trip Map -->
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1Z1UlDrOrj1a0ME3t_v5yiGWm0img9kU&ehbc=2E312F" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <div class="info-row">
+      <span class="icon">📅</span>
+      <span><strong>6 April - 10 April 2026</strong> (4 nights / 5 days)</span>
+    </div>
+
+    <!-- Accommodation -->
+    <div class="area-section">
+      <div class="area-title" data-area="accommodation"><span class="area-icon">🏨</span> Accommodation</div>
+      <div class="place-card accommodation">
+        <span class="place-tag">Living Place</span>
+        <h4>Unity Beach Somerset</h4>
+        <p class="place-address">Coast Rd, Brean, Sands, Burnham-on-Sea TA8 2RB</p>
+        <a class="map-link" href="https://maps.app.goo.gl/e8QUfJEtoEmWq5G57" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+    </div>
+
+    <!-- Weston-super-Mare -->
+    <div class="area-section">
+      <div class="area-title" data-area="weston"><span class="area-icon">🎡</span> Weston-super-Mare</div>
+
+      <div class="place-card attraction">
+        <span class="place-tag">Attraction</span>
+        <h4>The Grand Pier</h4>
+        <p class="place-address">Grand Pier (Stop P), Weston-super-Mare BS23 1AL</p>
+        <a class="map-link" href="https://maps.app.goo.gl/FnjZs3FuN5qM9Kfm7" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card museum">
+        <span class="place-tag">Museum</span>
+        <h4>Weston Museum</h4>
+        <p class="place-address">Burlington St, Weston-super-Mare BS23 1PR</p>
+        <a class="map-link" href="https://maps.app.goo.gl/pqJhuigxEWBjVMke7" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card parking">
+        <span class="place-tag">Car Park</span>
+        <h4>Melrose Car Park</h4>
+        <p class="place-address">30 Knightstone Rd, Weston-super-Mare BS23 2AW</p>
+        <a class="map-link" href="https://maps.app.goo.gl/ow6WFUZSp4X57xUn7" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card parking">
+        <span class="place-tag">Car Park</span>
+        <h4>NCP Weston-super-Mare High Street</h4>
+        <p class="place-address">4a High St, Weston-super-Mare BS23 1JF</p>
+        <a class="map-link" href="https://maps.app.goo.gl/p5ghr9Pjqm6uUSZ49" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card supermarket">
+        <span class="place-tag">Supermarket</span>
+        <h4>Tesco Superstore</h4>
+        <p class="place-address">Station Rd, Weston-super-Mare BS23 1XG</p>
+        <p class="place-remark">🅿️ 2 hours free parking — must spend £5 in store</p>
+        <a class="map-link" href="https://maps.app.goo.gl/yiWFPHp9PrursqjK7" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+    </div>
+
+    <!-- Wells -->
+    <div class="area-section">
+      <div class="area-title" data-area="wells"><span class="area-icon">⛪</span> Wells</div>
+
+      <div class="place-card parking">
+        <span class="place-tag">Car Park</span>
+        <h4>Union Street Car Park</h4>
+        <p class="place-address">19 Union St, Wells BA5 2PU</p>
+        <a class="map-link" href="https://maps.app.goo.gl/vyeEvJDYb17qxoXJ6" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card attraction">
+        <span class="place-tag">Attraction</span>
+        <h4>Wells Cathedral</h4>
+        <p class="place-address">Cathedral Grn, Wells BA5 2UE</p>
+        <a class="map-link" href="https://maps.app.goo.gl/5qTqVQ4NksXtDvJG7" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card shopping">
+        <span class="place-tag">Market</span>
+        <h4>Wells Market</h4>
+        <p class="place-address">Market Pl, Wells BA5 2SG</p>
+        <p class="place-remark">Wednesday: 9 am - 3 pm</p>
+        <a class="map-link" href="https://maps.app.goo.gl/tAtNu3mktkCNeTz27" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+    </div>
+
+    <!-- Cheddar -->
+    <div class="area-section">
+      <div class="area-title" data-area="cheddar"><span class="area-icon">🏔️</span> Cheddar</div>
+
+      <div class="place-card parking">
+        <span class="place-tag">Car Park</span>
+        <h4>Cheddar Gorge &amp; Caves Car Park</h4>
+        <p class="place-address">The Cliffs, Cheddar BS27 3QA</p>
+        <a class="map-link" href="https://maps.app.goo.gl/i8bhM54JeWivofPw6" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card attraction">
+        <span class="place-tag">Attraction</span>
+        <h4>Jacob's Ladder</h4>
+        <p class="place-address">Jacob's Ladder, Cheddar BS27 3QS</p>
+        <a class="map-link" href="https://maps.app.goo.gl/piPbaVKcQ5HtAwMAA" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card attraction">
+        <span class="place-tag">Attraction</span>
+        <h4>Thatchers Cider</h4>
+        <p class="place-address">Myrtle Farm, Station Rd, Sandford, Winscombe BS25 5RA</p>
+        <a class="map-link" href="https://maps.app.goo.gl/Nmsbo4YgRVXQt6sj9" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+  <div class="big-emoji">🏝️</div>
+  <p>Let us know which trip you're joining!<br>Message the group chat to confirm your spot.</p>
+  <p style="margin-top: 8px; font-size: 0.8rem; opacity: 0.7;">Made with love for the best beach crew</p>
+</div>
+
+<script>
+  function filterTrips(filter) {
+    // Update active button
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.filter === filter);
+    });
+
+    // Show/hide trip sections
+    document.querySelectorAll('.trip-section').forEach(section => {
+      section.classList.toggle('hidden', section.dataset.trip !== filter);
+    });
+  }
+
+  // Show Cornwall by default on load
+  filterTrips('cornwall');
+</script>
+
+</body>
+</html>
