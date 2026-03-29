@@ -608,6 +608,61 @@
   .town-btn.wells     { background: linear-gradient(135deg, #6A1B9A, #CE93D8); }
   .town-btn.cheddar   { background: linear-gradient(135deg, #558B2F, #AED581); }
 
+  /* ── Weather widget ── */
+  .weather-box {
+    background: linear-gradient(135deg, #E3F2FD, #E8EAF6);
+    border-radius: 18px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+  .weather-header {
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: #1A237E;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .weather-source {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #5C6BC0;
+    background: rgba(92,107,192,0.12);
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+  .weather-days {
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+  }
+  .weather-day {
+    flex: 1;
+    background: rgba(255,255,255,0.75);
+    border-radius: 14px;
+    padding: 12px 6px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    min-width: 0;
+  }
+  .wd-name { font-size: 0.78rem; font-weight: 800; color: #283593; text-transform: uppercase; letter-spacing: 0.5px; }
+  .wd-date { font-size: 0.68rem; color: #78909C; font-weight: 600; margin-bottom: 6px; }
+  .wd-icon { font-size: 1.8rem; line-height: 1; margin-bottom: 4px; }
+  .wd-desc { font-size: 0.65rem; color: #546E7A; font-weight: 600; margin-bottom: 6px; min-height: 18px; }
+  .wd-temp { display: flex; justify-content: center; gap: 5px; margin-bottom: 4px; }
+  .wd-max { font-size: 0.88rem; font-weight: 800; color: #E53935; }
+  .wd-min { font-size: 0.88rem; font-weight: 700; color: #1E88E5; }
+  .wd-rain { font-size: 0.68rem; font-weight: 700; color: #1565C0; }
+  .weather-loading { text-align: center; color: #78909C; font-size: 0.85rem; padding: 14px 0; font-weight: 600; }
+  @media (max-width: 480px) {
+    .wd-icon { font-size: 1.4rem; }
+    .wd-desc { display: none; }
+  }
+
   /* ── Responsive ── */
   @media (max-width: 640px) {
     .header h1 { font-size: 2.4rem; }
@@ -668,6 +723,12 @@
     <div class="info-row">
       <span class="icon">📅</span>
       <span><strong>2 April - 6 April 2026</strong> (4 nights / 5 days)</span>
+    </div>
+
+    <!-- Weather -->
+    <div class="weather-box">
+      <div class="weather-header">🌤️ 5-Day Weather Forecast <span class="weather-source">Met Office · Open-Meteo</span></div>
+      <div class="weather-days" id="weather-cornwall"><div class="weather-loading">Loading weather…</div></div>
     </div>
 
     <!-- Countdown -->
@@ -903,6 +964,12 @@
       <span><strong>6 April - 10 April 2026</strong> (4 nights / 5 days)</span>
     </div>
 
+    <!-- Weather -->
+    <div class="weather-box">
+      <div class="weather-header">🌤️ 5-Day Weather Forecast <span class="weather-source">Met Office · Open-Meteo</span></div>
+      <div class="weather-days" id="weather-somerset"><div class="weather-loading">Loading weather…</div></div>
+    </div>
+
     <!-- Countdown -->
     <div class="countdown-box" id="countdown-somerset">
       <div>
@@ -1054,6 +1121,58 @@
 </div>
 
 <script>
+  // ── Weather ──
+  function wmoIcon(c) {
+    if (c === 0) return '☀️';
+    if (c <= 1)  return '🌤️';
+    if (c <= 2)  return '⛅';
+    if (c <= 3)  return '☁️';
+    if (c <= 48) return '🌫️';
+    if (c <= 55) return '🌦️';
+    if (c <= 65) return '🌧️';
+    if (c <= 77) return '🌨️';
+    if (c <= 82) return '🌦️';
+    return '⛈️';
+  }
+  function wmoDesc(c) {
+    if (c === 0) return 'Clear';
+    if (c === 1) return 'Mainly Clear';
+    if (c === 2) return 'Partly Cloudy';
+    if (c === 3) return 'Overcast';
+    if (c <= 48) return 'Fog';
+    if (c <= 55) return 'Drizzle';
+    if (c <= 65) return 'Rain';
+    if (c <= 77) return 'Snow';
+    if (c <= 82) return 'Showers';
+    return 'Thunderstorm';
+  }
+  async function fetchWeather(lat, lon, containerId) {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Europe%2FLondon&forecast_days=5`;
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      const d = data.daily;
+      const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      let html = '';
+      for (let i = 0; i < 5; i++) {
+        const dt = new Date(d.time[i]);
+        html += `<div class="weather-day">
+          <div class="wd-name">${days[dt.getDay()]}</div>
+          <div class="wd-date">${dt.getDate()}/${dt.getMonth()+1}</div>
+          <div class="wd-icon">${wmoIcon(d.weathercode[i])}</div>
+          <div class="wd-desc">${wmoDesc(d.weathercode[i])}</div>
+          <div class="wd-temp"><span class="wd-max">${Math.round(d.temperature_2m_max[i])}°</span><span class="wd-min">${Math.round(d.temperature_2m_min[i])}°</span></div>
+          <div class="wd-rain">💧 ${d.precipitation_probability_max[i]}%</div>
+        </div>`;
+      }
+      document.getElementById(containerId).innerHTML = html;
+    } catch(e) {
+      document.getElementById(containerId).innerHTML = '<div class="weather-loading">Weather unavailable</div>';
+    }
+  }
+  fetchWeather(50.35, -4.75, 'weather-cornwall');   // Cornwall
+  fetchWeather(51.30, -3.00, 'weather-somerset');   // Somerset / Brean
+
   function jumpToArea(id) {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
