@@ -738,7 +738,7 @@
 
     <!-- Weather -->
     <div class="weather-box">
-      <div class="weather-header">🌤️ 5-Day Weather Forecast <span class="weather-source"><a href="https://weather.metoffice.gov.uk/forecast/gbuw75d29" target="_blank" rel="noopener">Met Office</a> · <a href="https://open-meteo.com/en/docs#latitude=50.35&longitude=-4.75&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max" target="_blank" rel="noopener">Open-Meteo</a></span></div>
+      <div class="weather-header">🌤️ 7-Day Weather Forecast <span class="weather-source"><a href="https://weather.metoffice.gov.uk/forecast/gbuw75d29" target="_blank" rel="noopener">Met Office</a> · <a href="https://open-meteo.com/en/docs#latitude=50.35&longitude=-4.75&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max" target="_blank" rel="noopener">Open-Meteo</a></span></div>
       <div class="weather-days" id="weather-cornwall"><div class="weather-loading">Loading weather…</div></div>
     </div>
 
@@ -977,7 +977,7 @@
 
     <!-- Weather -->
     <div class="weather-box">
-      <div class="weather-header">🌤️ 5-Day Weather Forecast <span class="weather-source"><a href="https://weather.metoffice.gov.uk/forecast/gcjgg3d77" target="_blank" rel="noopener">Met Office</a> · <a href="https://open-meteo.com/en/docs#latitude=51.30&longitude=-3.00&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max" target="_blank" rel="noopener">Open-Meteo</a></span></div>
+      <div class="weather-header">🌤️ 7-Day Weather Forecast <span class="weather-source"><a href="https://weather.metoffice.gov.uk/forecast/gcjgg3d77" target="_blank" rel="noopener">Met Office</a> · <a href="https://open-meteo.com/en/docs#latitude=51.30&longitude=-3.00&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max" target="_blank" rel="noopener">Open-Meteo</a></span></div>
       <div class="weather-days" id="weather-somerset"><div class="weather-loading">Loading weather…</div></div>
     </div>
 
@@ -1158,14 +1158,14 @@
     return 'Thunderstorm';
   }
   async function fetchWeather(lat, lon, containerId) {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Europe%2FLondon&forecast_days=5`;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Europe%2FLondon&forecast_days=7`;
     try {
       const res = await fetch(url);
       const data = await res.json();
       const d = data.daily;
       const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
       let html = '';
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 7; i++) {
         const dt = new Date(d.time[i]);
         html += `<div class="weather-day">
           <div class="wd-name">${days[dt.getDay()]}</div>
