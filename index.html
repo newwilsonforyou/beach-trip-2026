@@ -694,11 +694,11 @@
 
     <!-- Town Nav -->
     <div class="town-nav">
-      <button class="town-btn looe"      onclick="scrollTo('area-looe')">🌊 Looe</button>
-      <button class="town-btn staustell" onclick="scrollTo('area-staustell')">🌿 St Austell</button>
-      <button class="town-btn tintagel"  onclick="scrollTo('area-tintagel')">🏰 Tintagel</button>
-      <button class="town-btn polperro"  onclick="scrollTo('area-polperro')">🎣 Polperro</button>
-      <button class="town-btn plymouth"  onclick="scrollTo('area-plymouth')">⚓ Plymouth</button>
+      <button class="town-btn looe"      onclick="jumpToArea('area-looe')">🌊 Looe</button>
+      <button class="town-btn staustell" onclick="jumpToArea('area-staustell')">🌿 St Austell</button>
+      <button class="town-btn tintagel"  onclick="jumpToArea('area-tintagel')">🏰 Tintagel</button>
+      <button class="town-btn polperro"  onclick="jumpToArea('area-polperro')">🎣 Polperro</button>
+      <button class="town-btn plymouth"  onclick="jumpToArea('area-plymouth')">⚓ Plymouth</button>
     </div>
 
     <!-- Recommended Service Stop -->
@@ -927,9 +927,9 @@
 
     <!-- Town Nav -->
     <div class="town-nav">
-      <button class="town-btn weston" onclick="scrollTo('area-weston')">🎡 Weston-super-Mare</button>
-      <button class="town-btn wells"  onclick="scrollTo('area-wells')">⛪ Wells</button>
-      <button class="town-btn cheddar" onclick="scrollTo('area-cheddar')">🏔️ Cheddar</button>
+      <button class="town-btn weston" onclick="jumpToArea('area-weston')">🎡 Weston-super-Mare</button>
+      <button class="town-btn wells"  onclick="jumpToArea('area-wells')">⛪ Wells</button>
+      <button class="town-btn cheddar" onclick="jumpToArea('area-cheddar')">🏔️ Cheddar</button>
     </div>
 
     <!-- Accommodation -->
@@ -1054,7 +1054,7 @@
 </div>
 
 <script>
-  function scrollTo(id) {
+  function jumpToArea(id) {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
