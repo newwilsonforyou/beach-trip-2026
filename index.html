@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Beach Trip 2026</title>
+<!-- Google Analytics GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5L8NKKC2M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Z5L8NKKC2M');
+</script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Pacifico&display=swap');
 
@@ -887,13 +895,13 @@
       </div>
     </div>
 
-    <!-- Town Nav -->
+    <!-- Town Nav (ordered by date) -->
     <div class="town-nav">
-      <button class="town-btn looe"      onclick="jumpToArea('area-looe')">🌊 Looe</button>
-      <button class="town-btn staustell" onclick="jumpToArea('area-staustell')">🌿 St Austell</button>
-      <button class="town-btn tintagel"  onclick="jumpToArea('area-tintagel')">🏰 Tintagel</button>
+      <button class="town-btn plymouth"  onclick="jumpToArea('area-plymouth')">⚓ Plymouth · 3 Apr</button>
+      <button class="town-btn looe"      onclick="jumpToArea('area-looe')">🌊 Looe · 4 Apr</button>
+      <button class="town-btn staustell" onclick="jumpToArea('area-staustell')">🌿 St Austell · 5 Apr</button>
+      <button class="town-btn tintagel"  onclick="jumpToArea('area-tintagel')">🏰 Tintagel · 6 Apr</button>
       <button class="town-btn polperro"  onclick="jumpToArea('area-polperro')">🎣 Polperro</button>
-      <button class="town-btn plymouth"  onclick="jumpToArea('area-plymouth')">⚓ Plymouth</button>
     </div>
 
     <!-- Recommended Service Stop -->
@@ -918,120 +926,9 @@
       </div>
     </div>
 
-    <!-- Looe -->
-    <div class="area-section" id="area-looe">
-      <div class="area-title" data-area="looe"><span class="area-icon">🌊</span> Looe <span class="confirmed-badge">✅ 3 Apr 2026</span></div>
-
-      <div class="place-card parking">
-        <span class="place-tag">Car Park</span>
-        <h4>Millpool Car Park</h4>
-        <p class="place-address">Unnamed Road, Looe PL13 2AH</p>
-        <a class="map-link" href="https://maps.app.goo.gl/nWb6K2jHjKgkhxhc9" target="_blank" rel="noopener">📍 View on Google Maps</a>
-      </div>
-
-      <div class="place-card food">
-        <span class="place-tag">Farm Shop</span>
-        <h4>Quayside Fresh Ltd</h4>
-        <p class="place-address">Buller Quay, The Quay, Looe PL13 1DX</p>
-        <a class="map-link" href="https://maps.app.goo.gl/x2o49o8qWdP5Dd4J8" target="_blank" rel="noopener">📍 View on Google Maps</a>
-      </div>
-
-      <div class="place-card food">
-        <span class="place-tag">Seafood</span>
-        <h4>Pengelly's Fishmongers of Looe</h4>
-        <p class="place-address">The Quay, Looe PL13 1DX</p>
-        <a class="map-link" href="https://maps.app.goo.gl/t3njGBV4yNcvNTni7" target="_blank" rel="noopener">📍 View on Google Maps</a>
-      </div>
-
-      <div class="place-card museum">
-        <span class="place-tag">Museum</span>
-        <h4>Old Guildhall Museum &amp; Gaol</h4>
-        <p class="place-address">East 1AA, Higher Market St, Looe</p>
-        <a class="map-link" href="https://maps.app.goo.gl/jaVcE6yBw9LMVWuJA" target="_blank" rel="noopener">📍 View on Google Maps</a>
-      </div>
-
-      <div class="place-card attraction">
-        <span class="place-tag">Sightseeing</span>
-        <h4>Looe Beach</h4>
-        <p class="place-address">5 Lower Chapel St, East Looe, Looe PL13 1AT</p>
-        <a class="map-link" href="https://maps.app.goo.gl/uNPHRK8jz2ou7wNM6" target="_blank" rel="noopener">📍 View on Google Maps</a>
-      </div>
-    </div>
-
-    <!-- St Austell -->
-    <div class="area-section" id="area-staustell">
-      <div class="area-title" data-area="staustell"><span class="area-icon">🌿</span> St Austell <span class="confirmed-badge">✅ 5 Apr 2026</span></div>
-
-      <div class="place-card attraction">
-        <span class="place-tag">Attraction</span>
-        <h4>Eden Project</h4>
-        <p class="place-address">Bodelva, Par PL24 2SG</p>
-        <a class="map-link" href="https://maps.app.goo.gl/Yes9aMh2xZHt4N2w5" target="_blank" rel="noopener">📍 View on Google Maps</a>
-      </div>
-
-      <div class="place-card attraction">
-        <span class="place-tag">Art</span>
-        <h4>Cscape Art</h4>
-        <p class="place-address">The Old Workshop, Charlestown Rd, Saint Austell PL25 3NJ</p>
-        <a class="map-link" href="https://maps.app.goo.gl/37Rd9ifmzcScxPHu7" target="_blank" rel="noopener">📍 View on Google Maps</a>
-      </div>
-    </div>
-
-    <!-- Tintagel -->
-    <div class="area-section" id="area-tintagel">
-      <div class="area-title" data-area="tintagel"><span class="area-icon">🏰</span> Tintagel <span class="confirmed-badge">✅ 6 Apr 2026</span></div>
-
-      <div class="place-card parking">
-        <span class="place-tag">Parking</span>
-        <h4>King Arthur's Car Park</h4>
-        <p class="place-address">Fore Street, opposite NT Old Post Office, Tintagel PL34 0DA</p>
-        <a class="map-link" href="https://maps.app.goo.gl/23q2FXrkqBEsToED7" target="_blank" rel="noopener">📍 View on Google Maps</a>
-      </div>
-
-      <div class="place-card parking">
-        <span class="place-tag">Parking</span>
-        <h4>Tintagel Car Park (Mayfield Arcade)</h4>
-        <p class="place-address">Tintagel PL34 0DA</p>
-        <a class="map-link" href="https://maps.app.goo.gl/QjN57b9KmTj7SCQcA" target="_blank" rel="noopener">📍 View on Google Maps</a>
-      </div>
-
-      <div class="place-card attraction">
-        <span class="place-tag">Attraction</span>
-        <h4>Tintagel Castle</h4>
-        <p class="place-address">Castle Rd, Tintagel PL34 0HE</p>
-        <a class="map-link" href="https://maps.app.goo.gl/Th4ZnePLdyc2tTuv5" target="_blank" rel="noopener">📍 View on Google Maps</a>
-      </div>
-
-      <div class="place-card food">
-        <span class="place-tag">Farm Shop &amp; Cafe</span>
-        <h4>Boscastle Farm Shop &amp; Cafe</h4>
-        <p class="place-address">Hillsborough Farm, Boscastle PL35 0HH</p>
-        <a class="map-link" href="https://maps.app.goo.gl/dqwW2GDHLFZH4hos8" target="_blank" rel="noopener">📍 View on Google Maps</a>
-      </div>
-    </div>
-
-    <!-- Polperro -->
-    <div class="area-section" id="area-polperro">
-      <div class="area-title" data-area="polperro"><span class="area-icon">🎣</span> Polperro</div>
-
-      <div class="place-card parking">
-        <span class="place-tag">Car Park</span>
-        <h4>Polperro Public Car Park</h4>
-        <p class="place-address">The Car Park, Longcoombe Ln, Polperro, Looe PL13 2PL</p>
-        <a class="map-link" href="https://maps.app.goo.gl/NEfdjGo1tmHQyrLL6" target="_blank" rel="noopener">📍 View on Google Maps</a>
-      </div>
-
-      <div class="place-card attraction">
-        <span class="place-tag">Sightseeing</span>
-        <h4>Polperro Harbour</h4>
-        <p class="place-address">8 Lansallos St, Polperro, Looe PL13 2QU</p>
-        <a class="map-link" href="https://maps.app.goo.gl/Axhcdy3cqGra8JqX9" target="_blank" rel="noopener">📍 View on Google Maps</a>
-      </div>
-    </div>
-
-    <!-- Plymouth -->
+    <!-- Plymouth — 3 Apr -->
     <div class="area-section" id="area-plymouth">
-      <div class="area-title" data-area="plymouth"><span class="area-icon">⚓</span> Plymouth</div>
+      <div class="area-title" data-area="plymouth"><span class="area-icon">⚓</span> Plymouth <span class="confirmed-badge">✅ 3 Apr 2026</span></div>
 
       <div class="place-card parking">
         <span class="place-tag">Car Park</span>
@@ -1073,6 +970,119 @@
         <h4>Cross on the Hoe</h4>
         <p class="place-address">Unnamed Road, Plymouth PL1 2HJ</p>
         <a class="map-link" href="https://maps.app.goo.gl/wCQahABYkQnzByvHA" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+    </div>
+
+    <!-- Looe — 4 Apr -->
+    <div class="area-section" id="area-looe">
+      <div class="area-title" data-area="looe"><span class="area-icon">🌊</span> Looe <span class="confirmed-badge">✅ 4 Apr 2026</span></div>
+
+      <div class="place-card parking">
+        <span class="place-tag">Car Park</span>
+        <h4>Millpool Car Park</h4>
+        <p class="place-address">Unnamed Road, Looe PL13 2AH</p>
+        <a class="map-link" href="https://maps.app.goo.gl/nWb6K2jHjKgkhxhc9" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card food">
+        <span class="place-tag">Farm Shop</span>
+        <h4>Quayside Fresh Ltd</h4>
+        <p class="place-address">Buller Quay, The Quay, Looe PL13 1DX</p>
+        <a class="map-link" href="https://maps.app.goo.gl/x2o49o8qWdP5Dd4J8" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card food">
+        <span class="place-tag">Seafood</span>
+        <h4>Pengelly's Fishmongers of Looe</h4>
+        <p class="place-address">The Quay, Looe PL13 1DX</p>
+        <a class="map-link" href="https://maps.app.goo.gl/t3njGBV4yNcvNTni7" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card museum">
+        <span class="place-tag">Museum</span>
+        <h4>Old Guildhall Museum &amp; Gaol</h4>
+        <p class="place-address">East 1AA, Higher Market St, Looe</p>
+        <a class="map-link" href="https://maps.app.goo.gl/jaVcE6yBw9LMVWuJA" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card attraction">
+        <span class="place-tag">Sightseeing</span>
+        <h4>Looe Beach</h4>
+        <p class="place-address">5 Lower Chapel St, East Looe, Looe PL13 1AT</p>
+        <a class="map-link" href="https://maps.app.goo.gl/uNPHRK8jz2ou7wNM6" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+    </div>
+
+    <!-- St Austell — 5 Apr -->
+    <div class="area-section" id="area-staustell">
+      <div class="area-title" data-area="staustell"><span class="area-icon">🌿</span> St Austell <span class="confirmed-badge">✅ 5 Apr 2026</span></div>
+
+      <div class="place-card attraction">
+        <span class="place-tag">Attraction</span>
+        <h4>Eden Project</h4>
+        <p class="place-address">Bodelva, Par PL24 2SG</p>
+        <p class="place-remark">🗓️ 5 Apr 2026 &nbsp;|&nbsp; ⏰ Confirmed 10:30 am</p>
+        <a class="map-link" href="https://maps.app.goo.gl/Yes9aMh2xZHt4N2w5" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card attraction">
+        <span class="place-tag">Art</span>
+        <h4>Cscape Art</h4>
+        <p class="place-address">The Old Workshop, Charlestown Rd, Saint Austell PL25 3NJ</p>
+        <a class="map-link" href="https://maps.app.goo.gl/37Rd9ifmzcScxPHu7" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+    </div>
+
+    <!-- Tintagel — 6 Apr -->
+    <div class="area-section" id="area-tintagel">
+      <div class="area-title" data-area="tintagel"><span class="area-icon">🏰</span> Tintagel <span class="confirmed-badge">✅ 6 Apr 2026</span></div>
+
+      <div class="place-card parking">
+        <span class="place-tag">Parking</span>
+        <h4>King Arthur's Car Park</h4>
+        <p class="place-address">Fore Street, opposite NT Old Post Office, Tintagel PL34 0DA</p>
+        <a class="map-link" href="https://maps.app.goo.gl/23q2FXrkqBEsToED7" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card parking">
+        <span class="place-tag">Parking</span>
+        <h4>Tintagel Car Park (Mayfield Arcade)</h4>
+        <p class="place-address">Tintagel PL34 0DA</p>
+        <a class="map-link" href="https://maps.app.goo.gl/QjN57b9KmTj7SCQcA" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card attraction">
+        <span class="place-tag">Attraction</span>
+        <h4>Tintagel Castle</h4>
+        <p class="place-address">Castle Rd, Tintagel PL34 0HE</p>
+        <p class="place-remark">🗓️ 6 Apr 2026 &nbsp;|&nbsp; ⏰ Confirmed 11:00 am</p>
+        <a class="map-link" href="https://maps.app.goo.gl/Th4ZnePLdyc2tTuv5" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card food">
+        <span class="place-tag">Farm Shop &amp; Cafe</span>
+        <h4>Boscastle Farm Shop &amp; Cafe</h4>
+        <p class="place-address">Hillsborough Farm, Boscastle PL35 0HH</p>
+        <a class="map-link" href="https://maps.app.goo.gl/dqwW2GDHLFZH4hos8" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+    </div>
+
+    <!-- Polperro -->
+    <div class="area-section" id="area-polperro">
+      <div class="area-title" data-area="polperro"><span class="area-icon">🎣</span> Polperro</div>
+
+      <div class="place-card parking">
+        <span class="place-tag">Car Park</span>
+        <h4>Polperro Public Car Park</h4>
+        <p class="place-address">The Car Park, Longcoombe Ln, Polperro, Looe PL13 2PL</p>
+        <a class="map-link" href="https://maps.app.goo.gl/NEfdjGo1tmHQyrLL6" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      </div>
+
+      <div class="place-card attraction">
+        <span class="place-tag">Sightseeing</span>
+        <h4>Polperro Harbour</h4>
+        <p class="place-address">8 Lansallos St, Polperro, Looe PL13 2QU</p>
+        <a class="map-link" href="https://maps.app.goo.gl/Axhcdy3cqGra8JqX9" target="_blank" rel="noopener">📍 View on Google Maps</a>
       </div>
     </div>
 
@@ -1349,16 +1359,6 @@
       }
     });
   }
-  function rsvpAdd(trip, type) {
-    const input = document.getElementById('rsvp-' + trip + '-name');
-    const name = input.value.trim();
-    if (!name) { input.focus(); return; }
-    const data = rsvpLoad(trip);
-    data[type].push(name);
-    rsvpSave(trip, data);
-    input.value = '';
-    rsvpRender(trip);
-  }
   function rsvpRemove(trip, type, index) {
     const data = rsvpLoad(trip);
     data[type].splice(index, 1);
@@ -1371,6 +1371,7 @@
   function jumpToArea(id) {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    gtag('event', 'town_button_click', { town: id.replace('area-', '') });
   }
 
   function filterTrips(filter) {
@@ -1380,6 +1381,19 @@
     document.querySelectorAll('.trip-section').forEach(section => {
       section.classList.toggle('hidden', section.dataset.trip !== filter);
     });
+    gtag('event', 'trip_tab_click', { trip: filter });
+  }
+
+  function rsvpAdd(trip, type) {
+    const input = document.getElementById('rsvp-' + trip + '-name');
+    const name = input.value.trim();
+    if (!name) { input.focus(); return; }
+    const data = rsvpLoad(trip);
+    data[type].push(name);
+    rsvpSave(trip, data);
+    input.value = '';
+    rsvpRender(trip);
+    gtag('event', 'rsvp_click', { trip: trip, response: type });
   }
 
   // Countdown timer
