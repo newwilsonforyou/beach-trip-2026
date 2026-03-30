@@ -574,6 +574,109 @@
     font-weight: 600;
   }
 
+  /* ── RSVP Tracker ── */
+  .rsvp-box {
+    background: linear-gradient(135deg, #F3E5F5, #EDE7F6);
+    border-radius: 18px;
+    padding: 20px 22px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+  .rsvp-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #4A148C;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .rsvp-input-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .rsvp-input {
+    flex: 1;
+    min-width: 140px;
+    padding: 9px 14px;
+    border: 2px solid #CE93D8;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #37474F;
+    outline: none;
+    background: #fff;
+    transition: border-color 0.2s;
+  }
+  .rsvp-input:focus { border-color: #9C27B0; }
+  .rsvp-btn {
+    padding: 9px 18px;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    white-space: nowrap;
+  }
+  .rsvp-btn:hover { transform: translateY(-2px) scale(1.04); }
+  .rsvp-btn.do    { background: linear-gradient(135deg,#2E7D32,#66BB6A); color:#fff; box-shadow:0 3px 10px rgba(46,125,50,0.35); }
+  .rsvp-btn.watch { background: linear-gradient(135deg,#1565C0,#42A5F5); color:#fff; box-shadow:0 3px 10px rgba(21,101,192,0.35); }
+  .rsvp-lists {
+    display: flex;
+    gap: 12px;
+  }
+  .rsvp-col {
+    flex: 1;
+    background: rgba(255,255,255,0.65);
+    border-radius: 14px;
+    padding: 12px 14px;
+    min-height: 60px;
+  }
+  .rsvp-col-title {
+    font-size: 0.78rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .rsvp-col.do-col   .rsvp-col-title { color: #2E7D32; }
+  .rsvp-col.watch-col .rsvp-col-title { color: #1565C0; }
+  .rsvp-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.83rem;
+    font-weight: 600;
+    color: #37474F;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .rsvp-name:last-child { border-bottom: none; }
+  .rsvp-remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.75rem;
+    color: #B0BEC5;
+    padding: 0 4px;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+  .rsvp-remove:hover { color: #E53935; }
+  .rsvp-empty {
+    font-size: 0.78rem;
+    color: #B0BEC5;
+    font-weight: 500;
+    text-align: center;
+    padding: 6px 0;
+  }
+
   /* ── Town nav buttons ── */
   .town-nav {
     display: flex;
@@ -733,7 +836,7 @@
 
     <div class="info-row">
       <span class="icon">📅</span>
-      <span><strong>2 April - 6 April 2026</strong> (4 nights / 5 days)</span>
+      <span style="font-size:1.1rem;"><strong>2 April - 6 April 2026</strong> &nbsp;(4 nights / 5 days)</span>
     </div>
 
     <!-- Weather -->
@@ -762,6 +865,26 @@
       <div class="stat-pill">🅿️ 5 Car Parks</div>
       <div class="stat-pill">🍽️ 4 Food Spots</div>
       <div class="stat-pill">🏛️ 6 Attractions</div>
+    </div>
+
+    <!-- RSVP -->
+    <div class="rsvp-box">
+      <div class="rsvp-title">👥 Who's joining Cornwall?</div>
+      <div class="rsvp-input-row">
+        <input class="rsvp-input" id="rsvp-cornwall-name" type="text" placeholder="Your name…" maxlength="30">
+        <button class="rsvp-btn do"    onclick="rsvpAdd('cornwall','do')">✅ I'm joining!</button>
+        <button class="rsvp-btn watch" onclick="rsvpAdd('cornwall','watch')">👀 I'll watch</button>
+      </div>
+      <div class="rsvp-lists">
+        <div class="rsvp-col do-col">
+          <div class="rsvp-col-title">✅ Joining (<span id="rsvp-cornwall-do-count">0</span>)</div>
+          <div id="rsvp-cornwall-do-list"></div>
+        </div>
+        <div class="rsvp-col watch-col">
+          <div class="rsvp-col-title">👀 Watching (<span id="rsvp-cornwall-watch-count">0</span>)</div>
+          <div id="rsvp-cornwall-watch-list"></div>
+        </div>
+      </div>
     </div>
 
     <!-- Town Nav -->
@@ -797,7 +920,7 @@
 
     <!-- Looe -->
     <div class="area-section" id="area-looe">
-      <div class="area-title" data-area="looe"><span class="area-icon">🌊</span> Looe</div>
+      <div class="area-title" data-area="looe"><span class="area-icon">🌊</span> Looe <span class="confirmed-badge">✅ 3 Apr 2026</span></div>
 
       <div class="place-card parking">
         <span class="place-tag">Car Park</span>
@@ -1003,6 +1126,26 @@
       <div class="stat-pill">🏛️ 5 Attractions</div>
     </div>
 
+    <!-- RSVP -->
+    <div class="rsvp-box">
+      <div class="rsvp-title">👥 Who's joining Somerset?</div>
+      <div class="rsvp-input-row">
+        <input class="rsvp-input" id="rsvp-somerset-name" type="text" placeholder="Your name…" maxlength="30">
+        <button class="rsvp-btn do"    onclick="rsvpAdd('somerset','do')">✅ I'm joining!</button>
+        <button class="rsvp-btn watch" onclick="rsvpAdd('somerset','watch')">👀 I'll watch</button>
+      </div>
+      <div class="rsvp-lists">
+        <div class="rsvp-col do-col">
+          <div class="rsvp-col-title">✅ Joining (<span id="rsvp-somerset-do-count">0</span>)</div>
+          <div id="rsvp-somerset-do-list"></div>
+        </div>
+        <div class="rsvp-col watch-col">
+          <div class="rsvp-col-title">👀 Watching (<span id="rsvp-somerset-watch-count">0</span>)</div>
+          <div id="rsvp-somerset-watch-list"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- Town Nav -->
     <div class="town-nav">
       <button class="town-btn weston" onclick="jumpToArea('area-weston')">🎡 Weston-super-Mare</button>
@@ -1183,6 +1326,47 @@
   }
   fetchWeather(50.35, -4.75, 'weather-cornwall');   // Cornwall
   fetchWeather(51.30, -3.00, 'weather-somerset');   // Somerset / Brean
+
+  // ── RSVP ──
+  function rsvpKey(trip) { return 'rsvp_' + trip; }
+  function rsvpLoad(trip) {
+    try { return JSON.parse(localStorage.getItem(rsvpKey(trip))) || {do:[],watch:[]}; }
+    catch(e) { return {do:[],watch:[]}; }
+  }
+  function rsvpSave(trip, data) { localStorage.setItem(rsvpKey(trip), JSON.stringify(data)); }
+  function rsvpRender(trip) {
+    const data = rsvpLoad(trip);
+    ['do','watch'].forEach(type => {
+      const list = document.getElementById('rsvp-' + trip + '-' + type + '-list');
+      const count = document.getElementById('rsvp-' + trip + '-' + type + '-count');
+      count.textContent = data[type].length;
+      if (data[type].length === 0) {
+        list.innerHTML = '<div class="rsvp-empty">No one yet</div>';
+      } else {
+        list.innerHTML = data[type].map((name, i) =>
+          `<div class="rsvp-name"><span>${name}</span><button class="rsvp-remove" onclick="rsvpRemove('${trip}','${type}',${i})">✕</button></div>`
+        ).join('');
+      }
+    });
+  }
+  function rsvpAdd(trip, type) {
+    const input = document.getElementById('rsvp-' + trip + '-name');
+    const name = input.value.trim();
+    if (!name) { input.focus(); return; }
+    const data = rsvpLoad(trip);
+    data[type].push(name);
+    rsvpSave(trip, data);
+    input.value = '';
+    rsvpRender(trip);
+  }
+  function rsvpRemove(trip, type, index) {
+    const data = rsvpLoad(trip);
+    data[type].splice(index, 1);
+    rsvpSave(trip, data);
+    rsvpRender(trip);
+  }
+  rsvpRender('cornwall');
+  rsvpRender('somerset');
 
   function jumpToArea(id) {
     const el = document.getElementById(id);
